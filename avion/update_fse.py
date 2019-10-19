@@ -49,19 +49,19 @@ class UpdateFSE:
 
         self.update_bank(2)
 
-        self.update_stats(2)
+        # self.update_stats(2)
 
-        self.update_flights(2)
+        # self.update_flights(2)
 
-        self.update_aircrafts(2)
+        # self.update_aircrafts(2)
 
-        self.update_fbos(2)
+        # self.update_fbos(2)
 
-        self.update_facilities(2)
+        # self.update_facilities(2)
 
         # self.update_nml(2)
 
-        self.update_assignments(2)
+        # self.update_assignments(2)
 
         time_fin = timezone.now()
         duree = time_fin - time_debut

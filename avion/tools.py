@@ -371,7 +371,6 @@ class TimeOperation:
         return date_interval.days
 
 
-
 # def mesurer_temps(nb_secs):
 #     """Contrôle le temps mis par une fonction pour s'exécuter.
 #     Si le temps d'exécution est supérieur à nb_secs, on affiche une alerte"""

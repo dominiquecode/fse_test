@@ -1,0 +1,203 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{#    les finances de la compagnie #}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4>États financiers</h4>#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>Courant</th>#}
+{#                        <th>Banque</th>#}
+{#                        <th>Transaction</th>#}
+{#                        <th>Vols</th>#}
+{#                        <th>Distance</th>#}
+{#                        <th>Heures</th>#}
+{#                        <th>Profits</th>#}
+{##}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>{{  compte_courant}}$</td>#}
+{#                        <td>{{ banque }}$</td>#}
+{#                        <td>{{ volume }}</td>#}
+{#                        <td>{{ nb_vol }}</td>#}
+{#                        <td>{{ distance }}miles</td>#}
+{#                        <td>{{ temps_vol }}h</td>#}
+{#                        <td><strong>{{ profit|floatformat:2 }}$</strong></td>#}
+{#                    </tr>#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr>#}
+{##}
+{#    description de la flotte en service actuellement #}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4>Description de la flotte active</h4>#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>Immat</th>#}
+{#                        <th>Type</th>#}
+{#                        <th>Position</th>#}
+{#                        <th>Description</th>#}
+{#                        <th>Base</th>#}
+{#                        <th>Aéroport</th>#}
+{#                        <th>Prix vide</th>#}
+{#                        <th>Prix plein</th>#}
+{#                        <th>Structure</th>#}
+{#                        <th>Moteur</th>#}
+{#                        <th>100hr</th>#}
+{#                        <th>Locateur</th>#}
+{#                        <th>Frais mensuels</th>#}
+{#                        <th>Locateur</th>#}
+{#                    </tr>#}
+{#                    {% for avion in avions %}#}
+{#                        <tr>#}
+{#                            <td>{{ avion.registration }}</td>#}
+{#                            <td>{{ avion.makemodel }}</td>#}
+{#                            <td>{{ avion.home }}</td>#}
+{#                            <td>{{ avion.location }}</td>#}
+{#                            <td>{{ avion.airframe_time }}h</td>#}
+{#                            <td>{{ avion.engine_time }}h</td>#}
+{#                            <td>{{ avion.last100 }}h</td>#}
+{#                            <td>{{ avion.monthlyfee|floatformat:2 }}$</td>#}
+{#                            <td>{{ avion.leasedfrom }}</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr>#}
+{##}
+{#    Répartition des coûts par avion (ancien et actuel) #}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4>Répartition par avion (actuels et retraite)</h4>#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>Immat</th>#}
+{#                        <th>Type</th>#}
+{#                        <th>Location</th>#}
+{#                        <th>Travail</th>#}
+{#                        <th>Entretien</th>#}
+{#                        <th>Carburant</th>#}
+{#                        <th>Frais de vol</th>#}
+{#                        <th>Lease/Achat</th>#}
+{#                        <th>Frais mensuel</th>#}
+{#                        <th>Profits</th>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>F-14BMG</td>#}
+{#                        <td>Beechcraft Baron (BE58)</td>#}
+{#                        <td>{{ rentalb58|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentb58|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenanceb58|floatformat:2 }}$</td>#}
+{#                        <td>{{ fuelb58|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisb58|floatformat:2 }}$</td>#}
+{#                        <td>{{ leaseb58|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraismensuelb58|floatformat:2 }}$</td>#}
+{#                        <td>{{ profitb58|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>03-RENT</td>#}
+{#                        <td>Cessna Skyhawk (C172)</td>#}
+{#                        <td>{{ rentalc172|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentc172|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenancec172|floatformat:2 }}$</td>#}
+{#                        <td>{{ fuelc172|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisc172|floatformat:2 }}$</td>#}
+{#                        <td>{{ leasec172|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraismensuelc172|floatformat:2 }}$</td>#}
+{#                        <td>{{ profitc172|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>N652DG</td>#}
+{#                        <td>Cessna Skyhawk (C172)</td>#}
+{#                        <td>{{ rentaldg|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentdg|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenancedg|floatformat:2 }}$</td>#}
+{#                        <td>{{ fueldg|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisdg|floatformat:2 }}$</td>#}
+{#                        <td>{{ leasedg|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraismensueldg|floatformat:2 }}$</td>#}
+{#                        <td>{{ profitdg|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>N80991</td>#}
+{#                        <td>Cessna Skyhawk (C172)</td>#}
+{#                        <td>{{ rentalc17291|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentc17291|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenancec17291|floatformat:2 }}$</td>#}
+{#                        <td>{{ fuelc17291|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisc17291|floatformat:2 }}$</td>#}
+{#                        <td>{{ leasec17291|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraismensuelc17291|floatformat:2 }}$</td>#}
+{#                        <td>{{ profitc17291|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>N505GC</td>#}
+{#                        <td>Cessna Caravan (C208)</td>#}
+{#                        <td>{{ rentalc208gc|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentc208gc|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenancec208gc|floatformat:2 }}$</td>#}
+{#                        <td>{{ fuelc208gc|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisc208gc|floatformat:2 }}$</td>#}
+{#                        <td>{{ leasec208gc|floatformat:2 }}$</td>#}
+{#                        <td>0.00$</td>#}
+{#                        <td>{{ profitc208gc|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>N208TH</td>#}
+{#                        <td>Cessna Caravan (C208)</td>#}
+{#                        <td>{{ rentalc208|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentc208|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenancec208|floatformat:2 }}$</td>#}
+{#                        <td>{{ fuelc208|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisc208|floatformat:2 }}$</td>#}
+{#                        <td>{{ leasec208|floatformat:2 }}$</td>#}
+{#                        <td>0.00$</td>#}
+{#                        <td>{{ profitc208|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>N867EX</td>#}
+{#                        <td>Cessna Caravan (C208)</td>#}
+{#                        <td>{{ rentalc208ex|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentc208ex|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenancec208ex|floatformat:2 }}$</td>#}
+{#                        <td>{{ fuelc208ex|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisc208ex|floatformat:2 }}$</td>#}
+{#                        <td>{{ leasec208ex|floatformat:2 }}$</td>#}
+{#                        <td>0.00$</td>#}
+{#                        <td>{{ profitc208ex|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>N208BC</td>#}
+{#                        <td>Cessna Caravan (C208)</td>#}
+{#                        <td>{{ rentalc208bc|floatformat:2 }}$</td>#}
+{#                        <td>{{ assignmentc208bc|floatformat:2 }}$</td>#}
+{#                        <td>{{ maintenancec208bc|floatformat:2 }}$</td>#}
+{#                        <td>{{ fuelc208bc|floatformat:2 }}$</td>#}
+{#                        <td>{{ fraisc208bc|floatformat:2 }}$</td>#}
+{#                        <td>{{ leasec208bc|floatformat:2 }}$</td>#}
+{#                        <td>0.00$</td>#}
+{#                        <td>{{ profitc208bc|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{##}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <h3>Enregistrements </h3>  (les 50 derniers)#}
+{#    {% for data in datas %}#}
+{#        <ul>#}
+{#            <li>{{ data.ident }} {{ data.date_item }} {{ data.aircraft }}#}
+{#                {{ data.origine|upper }} {{ data.amount }} {{ data.reason }} {{ data.location }}#}
+{#                {{ data.aircraft }}#}
+{#            </li>#}
+{#        </ul>#}
+{#    {% endfor %}#}
+{##}
+{#{% endblock %}#}

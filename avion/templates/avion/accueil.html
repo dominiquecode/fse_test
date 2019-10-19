@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <h4>Bienvenue sur le site de <strong>GaugauAir Aviation</strong></h4>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Présentation générale</h5>
+            <p><strong>GaugauAir Aviation</strong> est une compagnie aérienne virtuelle qui utilise la plate-forme
+                <a href="http://www.fseconomy.net/welcome" target="_blank">FSEconomy</a> pour grandir.</p>
+            <p>Elle fut créée les 24 Avril 2018.</p>
+            <p>
+                La compagnie repose sur un réseau d'aéroports situés principalement dans le sud des États Unis.
+                et qui s'étend du Texas au Kentucky en passant par l'Oklahoma, la Louisiane, le Mississippi et bientôt
+                plus! </br>
+            </p>
+            <figure class="figure">
+                <img class="figure-img img-fluid rounded" src="{% static 'avion/img/GaugauAir_network_190608.png' %}"
+                     alt="texas network" width="500" height="350">
+                <figcaption class="figure-caption font-italic">Réseau USA</figcaption>
+            </figure>
+
+            <p>Sans parler d'un réseau en développement en Finlande.</p>
+            <figure>
+                <img class="figure-img img-fuild rounded" src="{% static 'avion/img/GaugauAir_network_finland.png' %}"
+                     alt="Finland network" width="500" height="450">
+                <figcaption class="figure-caption font-italic">Réseau Europe</figcaption>
+            </figure>
+            <hr>
+            <p>les objectifs sont :
+            <ul>
+                <li>Avoir du fun!</li>
+                <li>Avoir du fun!</li>
+                <li>Trouver le meilleur moyen pour rentabiliser le réseau en respectant les règles de la
+                    plate-forme FSEconomy
+                </li>
+                <li>Faire venir d'autres pilotes sur le réseau pour voler les avions et les jobs disponibles</li>
+                <li>Regarder les comptes de banque grossir sans rien faire!</li>
+            </ul>
+            </p>
+            <p>Une fois les objectifs atteint, je vais donner le tout à une personne débutante et reconstruire autre
+                chose ailleurs.</p>
+            <p><strong>N'oublions pas qu'il s'agit d'un jeu!!!!</strong></p>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <h5>Les avoirs de la compagnie</h5>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headeravion">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#avions" aria-expanded="false" aria-controls="avions">
+                                        Avions
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="avions" class="collapse" aria-labelledby="headeravion" data-parent="#avions">
+                                <div class="card-body">
+                                    <table>
+                                        {% for aircraft in aircrafts %}
+                                            <tr>
+                                                <td>{{ aircraft.registration }} - {{ aircraft.makemodel }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <p>Les avions sont la propriété de la compagnie pour certain, pour les autres ils sont en leasing.
+                        L'objectif est que la compagnie possède tous ses avions, mais les prix d'achat font qu'un peu de
+                        temps est nécessaire pour absorber l'investissement.</p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headerfbo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#fbo" aria-expanded="false" aria-controls="fbo">
+                                        FBO's
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="fbo" class="collapse" aria-labelledby="headerfbo" data-parent="#fbo">
+                                <div class="card-body">
+                                    <table>
+                                        {% for fbo in fbos %}
+                                            <tr>
+                                                <td>{{ fbo.location }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                <p>Les FBO's sont la propriété de la compagnie. Les réseaux installés sont utilisés soit directement
+                par le propriétaire, soit sous forme NML (Network Manager Lab)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

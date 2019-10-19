@@ -1,0 +1,58 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{##}
+{##}
+{#    description de la flotte des avions retirés #}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4>Description de la flotte en retraite</h4>#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>Immat</th>#}
+{#                        <th>Type</th>#}
+{#                        <th>Position</th>#}
+{#                        <th>Description</th>#}
+{#                        <th>Base</th>#}
+{#                        <th>Aéroport</th>#}
+{#                        <th>Prix vide</th>#}
+{#                        <th>Prix plein</th>#}
+{#                        <th>Structure</th>#}
+{#                        <th>Moteur</th>#}
+{#                        <th>100hr</th>#}
+{#                        <th>Locateur</th>#}
+{#                        <th>Frais mensuels</th>#}
+{#                        <th>Motif</th>#}
+{##}
+{#                        <th>Locateur</th>#}
+{#                    </tr>#}
+{#                    {% if avions %}#}
+{#                     {% for avion in avions %}#}
+{#                        <tr>#}
+{#                            <td>{{ avion.registration }}</td>#}
+{#                            <td>{{ avion.makemodel }}</td>#}
+{#                            <td>{{ avion.home }}</td>#}
+{#                            <td>{{ avion.location }}</td>#}
+{#                            <td>{{ avion.hr_structure }}h</td>#}
+{#                            <td>{{ avion.hr_moteur }}h</td>#}
+{#                            <td>{{ avion.hr_cent }}h</td>#}
+{#                            <td>{{ avion.monthlyfee|floatformat:2 }}$</td>#}
+{#                            <td>{{ avion.leasedfrom }}</td>#}
+{#                            <td>{{ avion.motif }}</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                    {% else %}#}
+{#                        <h6>Pas d'avion en retraite!</h6>#}
+{#                    {% endif %}#}
+{##}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr>#}
+{#    </div>#}
+{##}
+{##}
+{#{% endblock %}#}

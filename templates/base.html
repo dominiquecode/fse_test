@@ -1,0 +1,73 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'avion/css/fse.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'avion/img/logo_icone_01.png' %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Gestion avion</title>
+</head>
+<body>
+
+    <div class="container">
+        {% block navbar %}
+            {% include 'navbar.html' %}
+        {% endblock %}
+        <hr>
+
+        {% block titre %}
+            <div class="jumbotron">
+                <div class="row">
+                    <p class="col-sm-6">
+                        <img src="{% static 'avion/img/logo04.png' %}" alt="logo" width="300" height="100">
+                        <br>
+                        Voler encore!
+                    </p>
+
+                    <div class="col-sm-3">
+
+                        <h3>Gestion de la compagnie</h3>
+                        <p>
+                            Une flotte opérationnelle <br>
+                            Des FBO's efficaces <br>
+                            quelques heures de plaisir!
+                        </p>
+                        <form action="{% url 'avion:accueil' %}" method="post">{% csrf_token %}
+                            <input type="submit" value="Mettre à jour" class="btn btn-success btn-sm" name="maj">
+                        </form>
+{#                        <p><small>ATTENTION danger!</small></p>#}
+
+                    </div>
+                    <div class="col-sm-3">
+                        <p><img src="{% static 'avion/img/C208.png' %}" alt="Avion compagnie" width="250" height="120"></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr>
+        {% endblock %}
+
+
+        {% block content %}
+
+        {% endblock %}
+
+        {% block footer %}
+            {% include "footer.html" %}
+        {% endblock %}
+
+    </div>
+
+</body>
+</html>

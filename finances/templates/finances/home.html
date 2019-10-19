@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+
+<div class="container">
+
+    <h4>Gestion finances</h4>
+
+    <ul>
+        <li>liste des emprunts en cours</li>
+        <li>liste des montants nécessaires à la fin du mois courant</li>
+        <li>liste des projets d'expansion et leurs coûts prévisionnels</li>
+    </ul>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table>
+                <tr>
+                    <th>Les emprunts</th>
+                    <th>Total emprunts : {{ total_loan|float_string }}$</th>
+                    <th>Total payé : {{ total_paid|float_string }}$</th>
+                    <th>Total du : {{ total_due|float_string }}$</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <hr>
+
+   <div class="row">
+       <div class="col-sm-12">
+           <table>
+               <tr>
+                   <th>Emprunts en cours</th>
+                   <th>Date début</th>
+                   <th>Financé par</th>
+                   <th>Montant</th>
+                   <th>Montant versé</th>
+                   <th>Type</th>
+               </tr>
+               {% for loan in loans_actif %}
+                   <tr>
+                       <td>{{ loan.title }}</td>
+                       <td>{{ loan.date_begin }}</td>
+                       <td>{{ loan.finance_by }}</td>
+                       <td>{{ loan.amount|float_string }}$</td>
+                       <td>{{ loan.payback|float_string }}$</td>
+                       <td>{{ loan.type }}</td>
+                   </tr>
+               {% endfor %}
+           </table>
+       </div>
+   </div>
+    <hr>
+
+<div class="row">
+       <div class="col-sm-12">
+           <table>
+               <tr>
+                   <th>Emprunts terminés</th>
+                   <th>Date début</th>
+                   <th>Financé par</th>
+                   <th>Montant</th>
+                   <th>Montant versé</th>
+                   <th>Type</th>
+               </tr>
+               {% for loan in loans_terminated %}
+                   <tr>
+                       <td>{{ loan.title }}</td>
+                       <td>{{ loan.date_begin }}</td>
+                       <td>{{ loan.finance_by }}</td>
+                       <td>{{ loan.amount|float_string }}$</td>
+                       <td>{{ loan.payback|float_string }}$</td>
+                       <td>{{ loan.type }}</td>
+                   </tr>
+               {% endfor %}
+           </table>
+       </div>
+   </div>
+    <hr>
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+     <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+               <h4>Information Passagers disponibles</h4>
+                <form action="{% url 'network:pax' %}" method="post">{% csrf_token %}
+                    <input type="text" placeholder="Groupe" name="group">
+                    <input type="submit" value="information" class="btn btn-primary btn-sm" name="search">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+{#            <div class="col-sm-1">#}
+{#                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#detailgroupe"#}
+{#                    aria-expanded="false" aria-controls="detailgroupe">Détails#}
+{#                </button>#}
+{#            </div>#}
+
+            <div class="col-sm-12">
+{#                <div class="collapse" id="detailgroupe">#}
+{#                  <div class="card card-body">#}
+                    <table class="table">
+                            <tr>
+                                <th>Groupe</th>
+                                <th>FBO</th>
+                                <th>Nombre pax</th>
+                                <th>Montant</th>
+                            </tr>
+                            {% for p in pax %}
+                                <tr>
+                                    <td>{{ p.group }}</td>
+                                    <td>{{ p.icao}}</td>
+                                    <td class="text-right">{{ p.nbjobs }}</td>
+                                    <td class="text-right">{{ p.amount }}$</td>
+                                </tr>
+                            {% endfor %}
+                    </table>
+                  </div>
+                </div>
+            </div>
+
+{% endblock %}

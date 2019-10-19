@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 >Répartition du travail par avion</h4>
+                <p><strong>Profit généré par les avions : {{ profit_total|float_string }}$</strong></p>
+                <form action="{% url 'avion:aircrafts' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update_use">
+                </form>
+                <table>
+                    <tr>
+                        <th>Immat</th>
+                        <th>Location</th>
+                        <th>Travail</th>
+                        <th>Entretien</th>
+                        <th>Carburant</th>
+                        <th>lease/Achat</th>
+                        <th>Profits</th>
+                        <th>Ratio NM</th>
+                    </tr>
+
+                    {% for aircraft in aircrafts_cost %}
+                        <tr>
+                            <td>{{ aircraft.immat }}</td>
+                            <td>{{ aircraft.gain_location|float_string }}$</td>
+                            <td>{{ aircraft.gain_travail|float_string }}$</td>
+                            <td>{{ aircraft.frais_entretien|float_string }}$</td>
+                            <td>{{ aircraft.frais_carburant|float_string }}$</td>
+                            <td>{{ aircraft.lease|float_string }}$</td>
+                            <td>{{ aircraft.profits|float_string }}$</td>
+                            <td>{{ aircraft.ratio_nm|float_string }}$</td>
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+{% endblock %}

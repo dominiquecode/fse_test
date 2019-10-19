@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container">
+        <h2 >La liste des mouvements de banque importés</h2>
+        <h4> les 300 derniers Enregistrements </h4>
+        <p>Dernière mise à jour le : {{ last_date }}</p>
+        <form action="{% url 'avion:enregistrements' %}" method="post">{% csrf_token %}
+            <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">
+        </form>
+        <div class="row">
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Immat</th>
+                    <th>Payé par</th>
+                    <th>À</th>
+                    <th>Montant</th>
+                    <th>FBO</th>
+                    <th>Description</th>
+                    <th>Commentaire</th>
+                </tr>
+
+                {% for data in datas %}
+                <tr>
+                    <td>{{ data.ident }}</td>
+                    <td>{{ data.date_item }}</td>
+                    <td>{{ data.aircraft }}</td>
+                    <td>{{ data.origine|upper}}</td>
+                    <td>{{ data.destinataire }}</td>
+                    <td>{{ data.amount|floatformat:2 }}$</td>
+                    <td>{{ data.location }}</td>
+                    <td>{{ data.reason }}</td>
+                    <td>{{ data.comment }}</td>
+            {% endfor %}
+
+                </tr>
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+{% endblock %}

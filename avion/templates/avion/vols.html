@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+
+    <div class="container">
+        <h4>Les vols d'une mission</h4>
+        <form action="{% url 'avion:vols' %}" method="post">{% csrf_token %}
+            <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">
+{#            <input type="submit" value="Vols" class="btn btn-primary btn-sm" name="lookup">#}
+        </form>
+        <hr>
+        <div class="row">
+            <div class="col-sm-7">
+                <h5>Domaine de recherche</h5>
+
+                <form action="{% url 'avion:vols' %}" method="post">{% csrf_token %}
+                    <input type="text" placeholder="Immatriculation" name="registration">
+                    <input type="submit" value="Vols" class="btn btn-primary btn-sm" name="lookup">
+                </form>
+                <p><strong>Avion :  {{ avion }}</strong></p>
+                <p>La liste des vols concernés</p>
+                    <table>
+                        <tr>
+                            <th>Vol ident</th>
+                            <th>Origine</th>
+                            <th>Destination</th>
+                            <th>Revenus</th>
+                            <th>temps de vol</th>
+                            <th>distance</th>
+                        </tr>
+                        {% for flight in flights %}
+                        <tr>
+                            <td>{{ flight.id}}</td>
+                            <td>{{ flight.origine }}</td>
+                            <td>{{ flight.destination }}</td>
+                            <td>{{ flight.income|float_string }}$</td>
+                            <td>{{ flight.flighttime }}</td>
+                            <td>{{ flight.distance }}</td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+            </div>
+            <div class="col-sm-5">
+                <h5>Informations</h5>
+                <p>Critères de recherche</p>
+                <form action="{% url 'avion:vols' %}" method="post">{% csrf_token %}
+{#                    <input type="text" placeholder="Avion" name="avion">#}
+{#                    <input type="text" placeholder="FBO" name="fbo">#}
+                    <input type="text" placeholder="id premier vol" name="start">
+                    <input type="text" placeholder="id dernier vol" name="stop">
+                    <input type="submit" value="Confirmez" class="btn btn-primary btn-sm" name="confirm">
+                </form>
+
+                <table>
+                        <tr>
+                            <th>Revenus</th>
+                            <th>Profits</th>
+{#                            <th>Destination</th>#}
+{#                            <th>Revenus</th>#}
+{#                            <th>temps de vol</th>#}
+{#                            <th>distance</th>#}
+                        </tr>
+{#                        {% for result in results %}#}
+                        {% if results %}
+                        <tr>
+                            <td>{{ results.incomes|float_string }}$</td>
+                            <td>{{ results.profits|float_string }}$</td>
+{#                            <td>{{ result.destination }}</td>#}
+{#                            <td>{{ flight.income|float_string }}$</td>#}
+{#                            <td>{{ flight.flighttime }}</td>#}
+{#                            <td>{{ flight.distance }}</td>#}
+                        </tr>
+                        {% endif %}
+{#                    {% endfor %}#}
+                    </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

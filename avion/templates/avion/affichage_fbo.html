@@ -1,0 +1,76 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{##}
+{##}
+{#    description des assignements de fbo en service actuellement #}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4>Les données des fbo's</h4>#}
+{##}
+{#                montant d'assignements généré#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>FBO</th>#}
+{#                        <th>Montant assignements</th>#}
+{#                        <th>Frais de location</th>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>KADS</td>#}
+{#                        <td>{{ montant_kads|floatformat:2 }}$</td>#}
+{#                        <td>{{ location_kads|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>T41</td>#}
+{#                        <td>{{ montant_t41|floatformat:2 }}$</td>#}
+{#                        <td>{{ location_t41|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>SEQ</td>#}
+{#                        <td>{{ montant_SEQ|floatformat:2 }}$</td>#}
+{#                        <td>{{ location_SEQ|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>7TX4</td>#}
+{#                        <td>{{ montant_7TX4|floatformat:2 }}$</td>#}
+{#                        <td>{{ location_7TX4|floatformat:2 }}$</td>#}
+{#                    </tr>#}
+{#                </table>#}
+{#                <hr>#}
+{##}
+{#            détails des assignements #}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>Identification</th>#}
+{#                        <th>Lieu</th>#}
+{#                        <th>Vers</th>#}
+{#                        <th>À partir de</th>#}
+{#                        <th>Description</th>#}
+{#                        <th>Pax/Cargo</th>#}
+{#                        <th>Type</th>#}
+{#                        <th>Gérer par</th>#}
+{#                        <th>Montant</th>#}
+{#                    </tr>#}
+{#                    {% for contrat in contrats %}#}
+{#                        <tr>#}
+{#                            <td>{{ contrat.ident }}</td>#}
+{#                            <td>{{ contrat.location }}</td>#}
+{#                            <td>{{ contrat.toicao }}</td>#}
+{#                            <td>{{ contrat.fromicao }}</td>#}
+{#                            <td>{{ contrat.amount }}</td>#}
+{#                            <td>{{ contrat.unittype }}</td>#}
+{#                            <td>{{ contrat.commodity }}</td>#}
+{#                            <td>{{ contrat.pay|floatformat:2 }}$</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr>#}
+{#        </div>#}
+{##}
+{##}
+{#{% endblock %}#}

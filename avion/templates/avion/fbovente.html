@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+
+    <div class="container">
+        <h4 >FBO's à vendre</h4>
+        <div class="row">
+            <div class="col-sm-12">
+                    <h3>Les FBO's à vendre - {{ location }}</h3>
+                    <table>
+                        <tr>
+                            <th>Aéroport</th>
+                            <th>ICAO</th>
+                            <th>Lieu</th>
+                            <th>Lots</th>
+                            <th>Portes</th>
+                            <th>Portes louées</th>
+{#                            <th>Lots</th>#}
+                            <th>Status</th>
+                            <th>Atelier</th>
+                            <th>Prix</th>
+                        </tr>
+                        {% for fbo in fbos_list %}
+                        <tr>
+                            <td>{{ fbo.airport}}</td>
+                            <td>{{ fbo.icao }}</td>
+                            <td>{{ fbo.location }}</td>
+                            <td>{{ fbo.lots }}</td>
+                            <td>{{ fbo.gates}}</td>
+                            <td>{{ fbo.gatesrented }}</td>
+{#                            <td>{{ fbo.lots }}</td>#}
+                            <td>{{ fbo.status }}</td>
+                            <td>{{ fbo.repairshop }}</td>
+                            <td>{{ fbo.sellprice|float_string }}$</td>
+                            <td>chk</td>
+
+                        </tr>
+                    {% endfor %}
+                    </table>
+            </div>
+            <div class="col-sm-3">
+{#                <form action="{% url 'avion:fbos_for_sale' %}">#}
+{#                    <p><input type="text" id="localisation"></p>#}
+{#                    <p><input type="submit" value="Confirmez"></p>#}
+{#                </form>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

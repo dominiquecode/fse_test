@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+               <h4>TODO's</h4>
+                <form action="{% url 'avion:todo' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">
+                </form>
+                <table>
+                    <tr>
+                        <th>Créé le</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Réseau</th>
+                        <th>date end</th>
+                        <th>Actif</th>
+                    </tr>
+                    {% for todo in todos %}
+                        <tr>
+                            <td>{{ todo.date_created }}</td>
+                            <td>{{ todo.title }}</td>
+                            <td>{{ todo.description }}</td>
+                            <td>{{ todo.network }}</td>
+                            <td>{{ todo.date_end }}</td>
+                            <td>{{ todo.actif }}</td>
+                    </tr>
+                    {% endfor %}
+
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Description de la flotte active</h4>
+                <p>Dernière mise à jour le : {{ last_date }}</p>
+                <p>Total de frais fixes par mois: {{ monthlyfee_cost|float_string}}$</p>
+
+                <form action="{% url 'avion:aircrafts' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update_list">
+                </form>
+
+                <table>
+                    <tr>
+                        <th>Immat</th>
+                        <th>Type</th>
+                        <th>Aéroport</th>
+                        <th>Base</th>
+                        <th>Structure</th>
+                        <th>Moteur</th>
+                        <th>100hr</th>
+                        <th>Frais mensuels</th>
+                        <th>Locateur/Propriétaire</th>
+                    </tr>
+                    {% for aircraft in aircrafts_list %}
+                        <tr>
+                            <td>
+                                <form action="{% url 'avion:flights' %}" method="post">{% csrf_token %}
+                                    <input type="submit" value={{ aircraft.registration }} name='aircraft'>
+                                </form>
+                            </td>
+                            <td>{{ aircraft.makemodel }}</td>
+                            <td>{{ aircraft.location }}</td>
+                            <td>{{ aircraft.home }}</td>
+                            <td>{{ aircraft.airframe_time }}h</td>
+                            <td>{{ aircraft.engine_time }}h</td>
+                            <td>{{ aircraft.last100 }}h</td>
+                            <td>{{ aircraft.monthlyfee|float_string }}$</td>
+                            <td>{{ aircraft.leasedfrom }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <hr>
+
+{% endblock %}

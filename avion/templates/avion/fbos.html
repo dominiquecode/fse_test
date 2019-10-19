@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+               <h4>Information FBO's</h4>
+                <p>Dernière mise à jour le : {{ last_date }}</p>
+                <form action="{% url 'avion:fbos' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update_list">
+                </form>
+                <form action="{% url 'avion:fbos_for_sale' %}" method="post">{% csrf_token %}
+                    <input type="text" placeholder="localisation" name="localisation">
+                    <input type="submit" value="À vendre" class="btn btn-primary btn-sm" name="location">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ICAO</th>
+                            <th>Lieu</th>
+                            <th>Propriétaire</th>
+                            <th>Portes</th>
+                            <th>Louées</th>
+                            <th>100LL</th>
+                            <th>JetA</th>
+                            <th>Fourniture</th>
+                            <th>Nb jours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fbo in fbos_list %}
+                        <tr>
+                                <td><a href="http://server.fseconomy.net/airport.jsp?icao={{ fbo.icao }}" target="_blank">{{ fbo.icao }}</a></td>
+                                <td>{{ fbo.airport }}</td>
+                                <td>{{ fbo.owner }}</td>
+                                <td>{{ fbo.gates }}</td>
+                                <td>{{ fbo.gatesrented }}</td>
+                                <td>{{ fbo.fuel100ll }} Kg</td>
+                                <td>{{ fbo.fueljeta }} Kg</td>
+                                <td>{{ fbo.supplies }} Kg</td>
+                                <td>{{ fbo.suppliedday }} jours</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+                <h4>Information de vol pour {{ aircraft.registration }}</h4>
+                <p>Dernière mise à jour le : {{ last_date }}</p>
+                {#                <form action="{% url 'avion:flights' %}" method="post">{% csrf_token %}#}
+                {#                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">#}
+                {#                </form>#}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                {% if flights %}
+                    <h5>Informations générales</h5>
+                    <table>
+                        <tr>
+                            <td>Identifiant</td>
+                            <td>{{ aircraft.serialnumber }}</td>
+                        </tr>
+                        <tr>
+                            <td>Modèle</td>
+                            <td>{{ aircraft.makemodel }}</td>
+                        </tr>
+                        <tr>
+                            <td>Propriétaire</td>
+                            <td>{{ aircraft.owner }}</td>
+                        </tr>
+                        <tr>
+                            <td>Locateur</td>
+                            <td>{{ leaser }}</td>
+                        </tr>
+                        <tr>
+                            <td>Base d'opération</td>
+                            <td>{{ aircraft.home }}</td>
+                        </tr>
+                        <tr>
+                            <td>Localisation actuelle</td>
+                            <td>{{ aircraft.location }}</td>
+                        </tr>
+                        <tr>
+                            <td>Temps de vol total</td>
+                            <td>{{ flight_time_total|float_string:'0' }}h</td>
+                        </tr>
+                        <tr>
+                            <td>Revenus total</td>
+                            <td>{{ income_total|float_string:'0' }}$</td>
+                        </tr>
+                        <tr>
+                            <td>Revenus par NM</td>
+                            <td>{{ ratio_by_nm|float_string:'0' }}$</td>
+                        </tr>
+                        <tr>
+                            <td>Revenus par heure</td>
+                            <td>{{ ratio_by_hour|float_string:'0' }}$</td>
+                        </tr>
+                        <tr>
+                            <td>Retour sur investissement</td>
+                            <td>{{ ratio_finance|float_string:'0' }}%</td>
+                        </tr>
+
+                    </table>
+                {% endif %}
+                <hr>
+                <div class="accordion" id="accordionretired">
+                    <div class="card">
+                        <div class="card-header" id="headingretired">
+                            <h2 class="mb-0">
+                                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                        data-target="#collapseretired" aria-expanded="true"
+                                        aria-controls="collapseretired">
+                                    <h5>Retirer</h5>
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseretired" class="collapse collapse" aria-labelledby="headingretired"
+                             data-parent="#accordionretired">
+                            <div class="card-body">
+                                <p>Voulez-vous retirer l'avion immatriculé
+                                    <br><strong>{{ aircraft.registration }}</strong>?</p>
+                                <form action="#" method="post">{% csrf_token %}
+                                    <input type="submit" value="Confirmer" class="btn btn-primary btn-sm"
+                                           name="confirmed_retired">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="accordion" id="accordionregistration">
+                    <div class="card">
+                        <div class="card-header" id="headingregistration">
+                            <h2 class="mb-0">
+                                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                        data-target="#collapseregistration" aria-expanded="true"
+                                        aria-controls="collapseregistration">
+                                    <h5>Modifier immatriculation</h5>
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseregistration" class="collapse collapse" aria-labelledby="headingregistration"
+                             data-parent="#accordionregistration">
+                            <div class="card-body">
+                                <p>L'immatriculation actuelle est : <br>
+                                    <strong>{{ aircraft.registration }}</strong>?</p>
+                                <form action="#" method="post">{% csrf_token %}
+                                    <input type="text" name="registration_source" value={{ aircraft.registration }}>
+                                    <input type="text" placeholder="Nouvelle immatriculation" name="registration">
+                                    <input type="submit" value="Confirmer" class="btn btn-primary btn-sm"
+                                           name="modify_registration">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                {% if flights %}
+                    <h5>Les vols du mois </h5>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Origine</th>
+                            <th>Destination</th>
+                            <th>Durée du vol</th>
+                            <th>Distance</th>
+                            <th>Revenus</th>
+                        </tr>
+                        {% for flight in flights %}
+                            <tr>
+                                <td>{{ flight.time }}</td>
+                                <td>{{ flight.origine }}</td>
+                                <td>{{ flight.destination }}</td>
+                                <td>{{ flight.flighttime }}</td>
+                                <td>{{ flight.distance }}</td>
+                                <td>{{ flight.income|float_string }}$</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>Aucune donnée de vol {{ aircraft }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

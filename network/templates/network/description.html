@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+     <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+               <h4>Information Groupes NML</h4>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Description</h5>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Aircraft</th>
+{#                        <th>Model</th>#}
+                        <th>Hub</th>
+                        <th>Nb FBO's</th>
+                        <th>Pilot</th>
+                        <th>Status</th>
+{#                        <th>Profit total</th>#}
+{#                        <th>Nb Pax actuel</th>#}
+{#                        <th>Carte</th>#}
+                    </tr>
+
+                    {% for nml_group in nml_groups %}
+                        <tr>
+                            <td>{{ nml_group.name }}</td>
+                            <td>{{ nml_group.aircraft }}</td>
+{#                            <td>En construction</td>#}
+                            <td>{{ nml_group.hub }}</td>
+                            <td>{{ nml_group.nb_fbo }}</td>
+                            <td>{{ nml_group.pilot }}</td>
+                            <td>{{ nml_group.status }}</td>
+{#                            <td>100$</td>#}
+{#                            <td>12</td>#}
+{#                            <td><button class="btn btn-primary btn-sm">Cliquez ici</button></td>#}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+         <hr>
+{#         <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h5>État des lieux</h5>#}
+{#                <p>En développement</p>#}
+{#            </div>#}
+{#        </div>#}
+
+    </div>
+
+{% endblock %}

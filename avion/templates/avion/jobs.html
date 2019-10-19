@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+    <div class="container">
+{#        description de la flotte en service actuellement#}
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>Les jobs en cours</h4>
+                    <table>
+                        <tr>
+                            <th>Département</th>
+                            <th>Sélection</th>
+                        </tr>
+                        {% for account in accounts %}
+                            <tr>
+                                <td>{{ account.name }}</td>
+                                <td>
+                                    <form action="" method="post">{% csrf_token %}
+                                        <input class="btn btn-primary btn-sm" size="100" type="submit"
+                                               value='Afficher' id={{ account.name }}><br/>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            <div class="col-sm-8">
+                <p>les jobs en cours dans le groupe choisi</p>
+                <hr>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+{% endblock %}

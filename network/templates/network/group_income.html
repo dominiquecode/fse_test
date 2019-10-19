@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+     <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+
+               <h4>Information Groupes</h4>
+                <h5>Total cumulé des groupes : {{ total_transfert|float_string }}$</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#detailgroupe"
+                    aria-expanded="false" aria-controls="detailgroupe">Détails
+                </button>
+            </div>
+            <div class="col-sm-4">
+                <div class="collapse" id="detailgroupe">
+                  <div class="card card-body">
+                    <table class="table">
+                            <tr>
+                                <th>Groupe</th>
+                                <th>Cumul</th>
+                            </tr>
+                            {% for name, amount in groupes.items %}
+                            <tr>
+                                    <td>{{ name }}</td>
+                                    <td class="text-right">{{ amount|float_string}}$</td>
+                            </tr>
+                            {% endfor %}
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <p>
+
+        </p>
+
+
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                #}
+{#            </div>#}
+{#        </div>#}
+
+    </div>
+
+{% endblock %}

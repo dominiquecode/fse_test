@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+   <div class="row">
+            <div class="col-sm-6">
+                <h4>Choisir un avion</h4>
+{#                <form action="{% url 'avion:retired' %}" method="post">{% csrf_token %}#}
+                    <table>
+                        <tr>
+                            <th>Immatriculation</th>
+                        </tr>
+                        {% for aircraft in aircrafts %}
+                            <tr>
+                                <td>
+                                    <label for={{ aircraft.registration }}>{{ aircraft.registration }}</label>
+                                    <input name={{ aircraft.registration }} type="checkbox" value={{ aircraft.registration }}
+                                            id={{ aircraft.registration }}>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+{#                    <input class="btn btn-primary btn-sm" type="submit" value="Choisir">#}
+{#                </form>#}
+            </div>
+            <div class="col-sm-6">
+                <h4>Informations</h4>
+                <form action="" method="post">{% csrf_token %}
+                    <p>Cliquez sur le bouton ci-dessous pour afficher les informations de l'avion concerné</p>
+                    <input type="submit" id="confirm" class="btn btn-primary btn-sm" value="Confirmer">
+                </form>
+            </div>
+   </div>
+
+        <hr>
+</div>
+
+{% endblock %}

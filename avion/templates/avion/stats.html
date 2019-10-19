@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+
+    <div class="container">
+        {#    les finances de la compagnie #}
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Situation actuelle</h4>
+                <p>Dernière mise à jour le : {{ last_date }} GMT</p>
+                <form action="{% url 'avion:stats' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">
+                </form>
+                <table>
+                    <tr>
+                        <th>Compte</th>
+                        <th>Courant</th>
+                        <th>Banque</th>
+                        <th>Vols</th>
+                        <th>Distance</th>
+                        <th>Heures</th>
+                    </tr>
+                    {% for stat in statistics %}
+                        <tr style="font-size: 0.9em">
+                            <td>{{ stat.account }}</td>
+                            <td>{{ stat.personnal_balance|float_string }}$</td>
+                            <td>{{ stat.bank_balance|float_string }}$</td>
+                            <td>{{ stat.flights }}</td>
+                            <td>{{ stat.total_miles|float_string:'0' }} NM</td>
+                            <td>{{ stat.time_flown }}h</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <h4>Investissements compagnie</h4>
+                <p></p>
+                <p>AVIONS : {{ profits_avion|float_string }}$</p>
+                <p>FBO's : {{ investissement_fbo|float_string }}$</p>
+                <hr>
+                <h4>Montant disponible</h4>
+                <p></p>
+                <p>Total : {{ cash_available|float_string }}$</p>
+                <hr>
+                <h4>Gains externes</h4>
+                <p></p>
+
+                <p><strong>Dear Valley Aviation : </strong><br/>{{ dva_jobs|float_string }}$
+                    <br>(sem: {{ dva_jobs_week_current|float_string }}$)</p>
+                <form action="{% url 'avion:stats' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update_dva">
+                </form>
+                <hr>
+
+                <p><strong>Outback Air Charter International</strong><br/>{{ oac_jobs|float_string }}$</p>
+                <hr>
+
+                <p><strong>American Air Charter</strong><br/>{{ oac_jobs|float_string }}$</p>
+                <hr>
+
+                <p>
+                    <strong>Challenge 60 Days : </strong> (jour {{ recap_challenge.nb_days }})<br/>
+                    Revenus : {{ recap_challenge.income|float_string }}$<br>
+                    Frais : {{ recap_challenge.fees|float_string }}$<br>
+                    En caisse : {{ recap_challenge.balance|float_string }}$<br>
+                    Objectif : {{ recap_challenge.objectif|float_string }}$ <br>
+                </p>
+                <p>
+                    <h6>Statistiques</h6>
+                    h/jour: {{ recap_challenge.average_hours|float_string }}h <br>
+                    $/hr : {{ recap_challenge.average_income_by_hour|float_string }}$ <br>
+                    $/jour: {{ recap_challenge.average_income|float_string }}$ <br>
+                    <strong>Résultat compet : {{ recap_challenge.final_bank|float_string }}$</strong>
+                </p>
+
+                <br>
+                <div class="accordion" id="accordionaircrafts">
+                    <div class="card">
+                        <div class="card-header" id="headingaircrafts">
+                            <h2 class="mb-0">
+                                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                        data-target="#collapsehistorique" aria-expanded="true"
+                                        aria-controls="collapsehistorique">
+                                    <h6>Avions</h6>
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapsehistorique" class="collapse collapse" aria-labelledby="headinghistorique"
+                             data-parent="#accordionaircrafts">
+                            <div class="card-body">
+
+                                <table>
+                                    <tr>
+                                        <th>Immat</th>
+                                        <th>Tps Vol</th>
+                                        <th>Distance</th>
+                                        <th>Revenus</th>
+                                        <th>Frais</th>
+                                    </tr>
+                                    {% for aircraft in flights_challenge %}
+                                        <tr style="font-size: 0.7em">
+                                            <td>Avion : {{ aircraft.aircraft }}</td>
+                                            <td>{{ aircraft.flight_time|float_string }}Hr</td>
+                                            <td>{{ aircraft.distance }}NM</td>
+                                            <td>{{ aircraft.income|float_string }}$</td>
+                                            <td>{{ aircraft.fees|float_string }}$</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </p>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <hr>
+
+{% endblock %}

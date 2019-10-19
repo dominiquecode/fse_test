@@ -1,0 +1,38 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{#        <h4 >Mettre un avion à la retraite</h4>#}
+{#        <div class="row">#}
+{#            <div class="col-sm-6">#}
+{#                    <h3>Les avions de la flotte</h3>#}
+{#                    <table>#}
+{#                        <tr>#}
+{#                            <th>Immatriculation</th>#}
+{#                            <th>Type</th>#}
+{#                            <th>Localisation</th>#}
+{#                            <th>Sélection</th>#}
+{#                        </tr>#}
+{#                        {% for avion in avions %}#}
+{#                        <tr>#}
+{#                            <td>{{ avion.registration }}</td>#}
+{#                            <td>{{ avion.makemodel }}</td>#}
+{#                            <td>{{ avion.location }}</td>#}
+{#                            <td>chk</td>#}
+{##}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                    </table>#}
+{#            </div>#}
+{#            <div class="col-sm-6">#}
+{#                <form action="">#}
+{#                    {{ form.as_table }}#}
+{#                    <p><input type="submit" value="Confirmez"></p>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}

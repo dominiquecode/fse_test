@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Choisir un FBO</h4>
+                <form action="#" method="post">{% csrf_token %}
+                    <table>
+                        <tr>
+                            <th>Fbo</th>
+                            <th>sélection</th>
+                        </tr>
+                        {% for fbo in fbos %}
+                            <tr>
+                                <td>{{ fbo }}</td>
+                                <td><input type="checkbox" value="icao"></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                    <input class="btn btn-primary btn-sm" type="submit" value="Confirmer">
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <h4>Informations</h4>
+                {{ fbo.values }}
+
+            </div>
+        </div>
+
+        <hr>
+
+{% endblock %}

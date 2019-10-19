@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+               <h4>Information Facilities</h4>
+                <p>Dernière mise à jour le : {{ last_date }}</p>
+                <p><strong>Revenus générés par les FBO's : {{ incomes|float_string }}$</strong></p>
+                <p><strong>Investissements dans les FBO's : {{ profits|float_string}}$</strong></p>
+                <p><strong>Retour sur investissement : {{ return_rate|float_string}}%</strong></p>
+                <form action="{% url 'avion:facilities' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table>
+                    <tr>
+                        <th>ICAO</th>
+                        <th>Lieu</th>
+                        <th>Portes</th>
+                        <th>Destinations</th>
+                        <th>Mensuel</th>
+                        <th>Achat</th>
+                        <th>Revenus</th>
+                        <th>Profits</th>
+                    </tr>
+                    {% for facility in facilities %}
+                    <tr>
+                        <td><a href="http://server.fseconomy.net/airport.jsp?icao={{ facility.icao }}" target="_blank">{{ facility.icao }}</a></td>
+                        <td>{{ facility.location }}</td>
+                        <td>{{ facility.gatestotal }}</td>
+                        <td>{{ facility.destinations }}</td>
+                        <td>{{ facility.monthly_cost }}$</td>
+
+{#                            {% if facility.rentcost == 0.0 %}#}
+                        <td>{{ facility.buildcost|float_string:'0' }}$</td>
+{#                            {% else %}#}
+{#                                <td>{{ facility.rentcost }} + {{ facility.buildcost }}$</td>#}
+{#                            {% endif %}#}
+                        <td>{{ facility.incomes|float_string }}$</td>
+                        <td>{{ facility.profits|float_string }}$</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

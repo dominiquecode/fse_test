@@ -1,0 +1,46 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{#        <h4 >La liste des mouvements de banque importés</h4>#}
+{#        <div class="row">#}
+{##}
+{#            <div class="col-sm-6">#}
+{#                {% if datas %}#}
+{#                    <p>les nouveaux enregistrements</p>#}
+{#                    {% for elem in datas %}#}
+{#                        {{ elem }} <br/>#}
+{#                    {% endfor %}#}
+{#                {% else %}#}
+{#                    <h5>Pas de nouveaux enregistrements</h5>#}
+{#                {% endif %}#}
+{##}
+{#            </div>#}
+{#            <div class="col-sm-6">#}
+{#                {% if flotte %}#}
+{#                    <h3>Les avions de la flotte</h3>#}
+{#                    <table>#}
+{#                        <tr>#}
+{#                            <th>Immatriculation</th>#}
+{#                            <th>Type</th>#}
+{#                            <th>Localisation</th>#}
+{#                        </tr>#}
+{#                        {% for avion in flotte %}#}
+{#                        <tr>#}
+{#                            <td>{{ avion.registration }}</td>#}
+{#                            <td>{{ avion.makemodel }}</td>#}
+{#                            <td>{{ avion.location }}</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                    </table>#}
+{#                {% else %}#}
+{#                    <h5>Pas de nouveaux avions!</h5>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#{% endblock %}#}

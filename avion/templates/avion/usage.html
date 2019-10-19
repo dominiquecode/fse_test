@@ -1,0 +1,172 @@
+{#{% extends "base.html" %}#}
+{#{% load static %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <div class="container">#}
+    {#    les finances de la compagnie #}
+{#        <div class="row">#}
+{#            <div class="col-sm-8">#}
+{#                <h4>États financiers</h4>#}
+{#                <form action="">#}
+{#                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm">#}
+{#                </form>#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>Compte</th>#}
+{#                        <th>Courant</th>#}
+{#                        <th>Banque</th>#}
+{#                        <th>Transaction</th>#}
+{#                        <th>Vols</th>#}
+{#                        <th>Distance</th>#}
+{#                        <th>Heures</th>#}
+{#                        <th>Profits</th>#}
+{##}
+{#                    </tr>#}
+{#                    {% for stat in stats %}#}
+{#                        <tr>#}
+{#                            <td>{{ stat.account }}</td>#}
+{#                            <td>{{ stat.personnal_balance}}$</td>#}
+{#                            <td>{{ stat.bank_balance }}$</td>#}
+{#                            <td>{{ transactions }}</td>#}
+{#                            <td>{{ stat.flights }}</td>#}
+{#                            <td>{{ stat.total_miles }} miles</td>#}
+{#                            <td>{{ stat.time_flown }}h</td>#}
+{#                            <td><strong>{{ profit_total|floatformat:2 }}$</strong></td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
+{#            </div>#}
+{#        <div class="col-sm-4">#}
+{#            <p>test</p>#}
+{#        </div>#}
+{#        </div>#}
+{#        <hr>#}
+
+{##}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4>La liste des fbo's utilisés (en test)</h4>#}
+{#                <table>#}
+{#                    <tr>#}
+    {#                    <th>Identification</th>#}
+{#                        <th>Propriétaire</th>#}
+    {#                    <th>Origine</th>#}
+{#                        <th>Coûts location</th>#}
+{#                        <th>Portes</th>#}
+    {#                    <th>Raison</th>#}
+{#                        <th>FBO</th>#}
+{#                        <th>Lieu</th>#}
+    {#                    <th>Commentaire</th>#}
+{#                        <th>Date</th>#}
+{#                        <th>Image</th>#}
+{#                    </tr>#}
+{#                    {% for fbo in fbos %}#}
+{#                        <tr>#}
+    {#                        <td>{{ fbo.ident }}</td>#}
+{#                            <td>{{ fbo.destinataire }}</td>#}
+    {#                        <td>{{ fbo.origine }}</td>#}
+{#                            <td>{{ fbo.amount|floatformat:2 }}$</td>#}
+{#                            <td>{{ fbo.gatestotal }}</td>#}
+    {#                        <td>{{ fbo.reason }}</td>#}
+{#                            <td>{{ fbo.fbo }}</td>#}
+{#                            <td>{{ fbo.location }}</td>#}
+    {#                        <td>{{ fbo.comment }}</td>#}
+{#                            <td>{{ fbo.date_item }}</td>#}
+{#                            <td><a href="{% static 'avion/img/KADS.png' %}">#}
+{#                                <img src="{% static 'avion/img/T41.png' %}" alt=""#}
+{#                                     width="80" height="30"></a></td>#}
+{#                        </tr>#}
+{#                    {% endfor %}/#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr>#}
+    {#    description de la flotte en service actuellement #}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4>Description de la flotte active</h4>#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>Immat</th>#}
+{#                        <th>Type</th>#}
+{#                        <th>Position</th>#}
+{#                        <th>Description</th>#}
+{#                        <th>Aéroport</th>#}
+{#                        <th>Base</th>#}
+{#                        <th>Prix vide</th>#}
+{#                        <th>Prix plein</th>#}
+{#                        <th>Structure</th>#}
+{#                        <th>Moteur</th>#}
+{#                        <th>100hr</th>#}
+{#                        <th>Locateur</th>#}
+{#                        <th>Frais mensuels</th>#}
+{#                        <th>Locateur/Propriétaire</th>#}
+{#                    </tr>#}
+{#                    {% for aircraft in aircrafts_list %}#}
+{#                        <tr>#}
+{#                            <td>{{ aircraft.registration }}</td>#}
+{#                            <td>{{ aircraft.makemodel }}</td>#}
+{#                            <td></td>#}
+{#                            <td></td>#}
+{#                            <td>{{ aircraft.location }}</td>#}
+{#                            <td>{{ aircraft.home }}</td>#}
+{#                            <td>{{ aircraft.airframe_time }}h</td>#}
+{#                            <td>{{ aircraft.engine_time }}h</td>#}
+{#                            <td>{{ aircraft.last100 }}h</td>#}
+{#                            <td>{{ aircraft.monthlyfee|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.leasedfrom }}</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
+{#            </div>#}
+{##}
+{##}
+{#        </div>#}
+{#        <hr>#}
+{##}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <h4 >Répartition du travail par avion</h4>#}
+{#                <p><strong>Profit généré par les avions : {{ profit_total|floatformat:2 }}$</strong></p>#}
+{#                <p><strong>Profit généré par les FBO's : N/A</strong></p>#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        <th>ID</th>#}
+{#                        <th>Date</th>#}
+{#                        <th>Immat</th>#}
+{#                        <th>Location</th>#}
+{#                        <th>Travail</th>#}
+{#                        <th>Entretien</th>#}
+{#                        <th>Carburant</th>#}
+{#                        <th>Frais vol</th>#}
+{#                        <th>Frais lease/Achat</th>#}
+{#                        <th>Frais mensuels</th>#}
+{#                        <th>Profits</th>#}
+{#                    </tr>#}
+{##}
+{#                    {% for aircraft in aircrafts_cost %}#}
+{#                        <tr>#}
+{#                            <td>{{ data.ident }}</td>#}
+{#                            <td>{{ data.date_created }}</td>#}
+{#                            <td>{{ aircraft.immat }}</td>#}
+{#                            <td>{{ aircraft.gain_location|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.gain_travail|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.frais_entretien|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.frais_carburant|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.frais_vol|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.lease|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.frais_mensuel|floatformat:2 }}$</td>#}
+{#                            <td>{{ aircraft.profits|floatformat:2 }}$</td>#}
+{#                        </tr>#}
+{##}
+{#                    {% endfor %}#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#}
+{#    </div>#}
+{#    <hr>#}
+{##}
+{#{% endblock %}#}

@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  # le proxy monté sur nginx
+  nginx:
+    image: nginx
+    container_name: proxy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./static:/static
+    depends_on:
+      - web
+
+  # l'application web Django + gunicorn
+  web:
+    build: .
+    container_name: app
+    command: bash -c "python manage.py makemigrations
+              && python manage.py migrate
+              && python manage.py collectstatic --no-input
+              && gunicorn fse.wsgi -b 0.0.0.0:8000
+              && python manage.py runserver 8000 --settings=fse.settings "
+
+    # en mode dev on garde le lien avec le répertoire local
+    volumes:
+#      - .:/fse
+      - ./static:/static
+      - datas:/fse
+
+    expose:
+      - "8000"
+
+volumes:
+  datas:

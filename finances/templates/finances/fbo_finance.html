@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Résultats mensuel par FBO</h3>
+                <form action="{% url 'finances:fbo_finance' %}" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <img src="{% static 'avion/img/fbo.jpg' %}" alt="fbo" width="150" height="150">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>FBO</h4>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+
+    <div class="container">
+
+        <h4>Suivi des Network Managment Lab</h4>
+        <p>
+        <form action="{% url 'network:home' %}" method="post">{% csrf_token %}
+            <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update_nml">
+        </form>
+        </p>
+
+        <h5>Résultats</h5>
+        <table>
+            <tr>
+                <th>Group</th>
+                <th>Pilot</th>
+                <th>Aircraft</th>
+                <th>Incomes</th>
+                <th>Pilot Fee</th>
+                <th>Group Fee</th>
+                <th>ROI</th>
+                <th>Flights</th>
+                <th>Inscription</th>
+                <th>Last flight</th>
+            </tr>
+            {% for nml_group in nml_results %}
+                <tr>
+                    <td>{{ nml_group.nml }}</td>
+                    <td>{{ nml_group.pilot }}</td>
+                    <td>{{ nml_group.aircraft }}</td>
+                    <td>{{ nml_group.income|float_string }}$</td>
+                    <td>{{ nml_group.pilot_fee|float_string }}$</td>
+                    <td>{{ nml_group.group_fee|float_string }}$</td>
+                    <td>{{ nml_group.rentability|float_string }}%</td>
+                    <td>{{ nml_group.nb_vol }}</td>
+                    <td>{{ nml_group.inscription }}</td>
+                    <td>{{ nml_group.last_flight }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <div class="accordion" id="accordionhistorique">
+            <div class="card">
+                <div class="card-header" id="headinghistorique">
+                    <h2 class="mb-0">
+                        <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapsehistorique" aria-expanded="true" aria-controls="collapsehistorique">
+                            <h5>Historique pilotes</h5>
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapsehistorique" class="collapse collapse" aria-labelledby="headinghistorique"
+                     data-parent="#accordionhistorique">
+                    <div class="card-body">
+
+                        <table>
+                            <tr>
+                                <th>Pilote</th>
+                                <th>Date inscription</th>
+                                <th>Réseau</th>
+                                <th>Date départ</th>
+                                <th>Actif</th>
+                            </tr>
+                            {% for pilot in nml_pilots_historique %}
+                                <tr>
+                                    <td>{{ pilot.name }}</td>
+                                    <td>{{ pilot.date_inscription }}</td>
+                                    <td>{{ pilot.network }}</td>
+                                    <td>{{ pilot.date_depart }}</td>
+                                    <td>{{ pilot.actif }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="accordion" id="accordionvols">
+            <div class="card">
+                <div class="card-header" id="headingflight">
+                    <h2 class="mb-0">
+                        <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseflight" aria-expanded="true" aria-controls="collapseflight">
+                            <h5>Détails des vols</h5>
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseflight" class="collapse collapse" aria-labelledby="headingflight"
+                     data-parent="#accordionvols">
+                    <div class="card-body">
+
+                        <table>
+                            <tr>
+                                <th>Date</th>
+                                <th>Groupe</th>
+                                <th>Pilote</th>
+                                <th>Revenus</th>
+                                <th>Pilot</th>
+                                {#                    <th>Crew</th>#}
+                                <th>Booking fee</th>
+                                <th>Ground crew fee</th>
+                                <th>Group</th>
+                                <th>Rep</th>
+                            </tr>
+                            {% for nml_flight in nml_flights %}
+                                <tr>
+                                    <td>{{ nml_flight.time }}</td>
+                                    <td>{{ nml_flight.groupname }}</td>
+                                    <td>{{ nml_flight.pilot }}</td>
+                                    <td>{{ nml_flight.income|float_string }}$</td>
+                                    <td>{{ nml_flight.pilotfee|float_string }}$</td>
+                                    {#                    <td>{{ nml_flight.crewcost|float_string }}$</td>#}
+                                    <td>{{ nml_flight.bookingfee|float_string }}$</td>
+                                    <td>{{ nml_flight.gcf|float_string }}$</td>
+                                    <td>{{ nml_flight.groupfee|float_string }}$</td>
+                                    <td>{{ nml_flight.repartition_group|float_string }}%</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

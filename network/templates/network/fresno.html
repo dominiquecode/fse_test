@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col_sm_12">
+
+                <h4>Information Fresno</h4>
+                (en dev)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Afficher les infos mise à jour de l'opération GaugauAir Californie KFAT</h5>
+                <p>La liste des FBO's concernés</p>
+                <hr>
+                <p>La liste des avions concernés</p>
+                <table>
+                    <tr>
+                        <th>Immatriculation</th>
+                        <th>Modèle</th>
+                        <th>Localisation</th>
+                        <th>Équipement</th>
+                        <th>Temps utilisation</th>
+                        <th>100h dans ...</th>
+                    </tr>
+                    {% for aircraft in aircrafts %}
+                        <tr>
+                            <td>{{ aircraft.icao }}</td>
+                        </tr>
+                    {% endfor %}
+
+
+                </table>
+                <hr>
+                <p>L'état des FBOs concernés (FBO by key datasfeed)</p>
+                <table>
+                    <tr>
+                        <th>Aéroport</th>
+                        <th>Nb porte(s)</th>
+                        <th>Qté 100LL</th>
+                        <th>Qté JetA</th>
+                        <th>Fourniture (jours)</th>
+                    </tr>
+                    {% for aeroport in management %}
+                        <tr>
+                            <td>{{ aeroport.airport }} ({{ aeroport.icao }}</td>
+                            <td>{{ aeroport.gates }}</td>
+                            <td>{{ aeroport.fuel100ll }}</td>
+                            <td>{{ aeroport.fueljeta }}</td>
+                            <td>{{ aeroport.suppliedday }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <hr>
+                <p>L'état des contrats (pax) concernées (Assignment by key)</p>
+
+                <div class="accordion" id="assignments">
+                    <div class="card">
+                        <div class="card-header" id="headingassignments">
+                            <h2 class="mb-0">
+                                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                        data-target="#collapsehistorique" aria-expanded="true"
+                                        aria-controls="collapsehistorique">
+                                    <h6>Jobs (en attente : {{ total|float_string }}$)</h6>
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapsehistorique" class="collapse collapse" aria-labelledby="headingassignments"
+                             data-parent="#assignments">
+                            <div class="card-body">
+                                <table>
+                                    <tr>
+                                        <th>FBO</th>
+                                        <th>Destination</th>
+                                        <th>Quantité</th>
+                                        <th>Revenus</th>
+                                    </tr>
+                                    {% for facility in facilities %}
+                                        <tr>
+                                            <td>{{ facility.location }}</td>
+                                            <td>{{ facility.toicao }}</td>
+                                            <td>{{ facility.amount }}</td>
+                                            <td>{{ facility.pay|float_string }}$</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <p>L'état de la banque GaugauAir Californie (Statistics by key)</p>
+                <table>
+                    <tr>
+                        <th>Réseau</th>
+                        <th>Compte courant</th>
+                        <th>Compte epargne</th>
+                    </tr>
+                    <tr>
+                        {% for stat in stats %}
+                            <tr>
+                                <td>{{ stat.account }}</td>
+                                <td>{{ stat.personnal_balance|float_string }}$</td>
+                                <td>{{ stat.bank_balance|float_string }}$</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tr>
+                </table>
+                <hr>
+                <form action="" method="post">{% csrf_token %}
+                    <input type="submit" value="Mettre à jour" class="btn btn-primary btn-sm" name="update">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
